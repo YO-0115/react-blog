@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState, useContext } from 'react'
-import { getPostId } from '../../WebAPI'
 import { useParams } from 'react-router-dom'
+import MDEditor from '@uiw/react-md-editor'
+import { getPostId } from '../../WebAPI'
 import { LoadingContext } from '../../contexts'
 import {
   PostContainer,
@@ -40,7 +41,9 @@ function PostPage() {
             {new Date(post.createdAt).toLocaleDateString()}
           </PostCreatedAt>
         </PostInfo>
-        <PostContent>{post.body}</PostContent>
+        <PostContent>
+          <MDEditor.Markdown source={post.body} />
+        </PostContent>
       </PostBody>
     </PostContainer>
   )

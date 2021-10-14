@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import MDEditor from '@uiw/react-md-editor'
 import { createNewPost } from '../../WebAPI'
 import {
   NewPostContainer,
   NewPostTitle,
   NewPostTitleInput,
   NewPostBody,
-  NewPostContent,
   NewPostButton,
-  ErrorMessage
+  ErrorMessage,
 } from './NewPostPageStyle'
 
 function NewPostPage() {
@@ -20,10 +20,6 @@ function NewPostPage() {
 
   const handleTitleInput = (e) => {
     setTitleValue(e.target.value)
-  }
-
-  const handlePostInput = (e) => {
-    setPostValue(e.target.value)
   }
 
   const handleInputFocus = () => {
@@ -53,14 +49,14 @@ function NewPostPage() {
         />
       </NewPostTitle>
       <NewPostBody>
-        <NewPostContent
-          onFocus={handleInputFocus}
-          onChange={handlePostInput}
-          rows="20"
-          placeholder="寫點內容..."
-        >
-          {postValue}
-        </NewPostContent>
+        <MDEditor
+          value={postValue}
+          height={300}
+          textareaProps={{
+            placeholder: 'Please enter Markdown text',
+          }}
+          onChange={setPostValue}
+        />
       </NewPostBody>
       <NewPostButton onClick={handleSendPost}>送出</NewPostButton>
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
