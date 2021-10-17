@@ -13,6 +13,7 @@ import { Link, NavLink } from 'react-router-dom'
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0 32px;
   background: white;
+  z-index: 50;
 `
 
  export const Brand = styled(Link)`

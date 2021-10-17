@@ -3,6 +3,19 @@ import styled from 'styled-components'
 export const PostContainer = styled.div`
   width: 70%;
   margin: 56px auto;
+  position: relative;
+`
+
+export const DeleteButton = styled.div`
+  position: absolute;
+  right: 0;
+  top: 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: #145df6;
+    font-weight: 600;
+  }
 `
 
 export const PostTitle = styled.div`

@@ -6,6 +6,22 @@ export const PostList = styled.div`
   max-width: 800px;
   margin: 40px auto;
 `
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const PostListButton = styled.div`
+  margin: 0 8px;
+  cursor: pointer;
+  color: ${(props) => (props.$active ? 'black' : 'gray')};
+  font-weight: ${(props) => (props.$active ? '600' : '')};
+
+  &:hover {
+    color: #145df6;
+  }
+`
 
 export const YearContainer = styled.div`
   padding-top: 32px;

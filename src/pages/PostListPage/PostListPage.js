@@ -1,12 +1,14 @@
-import React, { useLayoutEffect, useState, useContext } from 'react'
+import React, { useLayoutEffect, useEffect, useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import { getPostsList } from '../../WebAPI'
-import { LoadingContext } from '../../contexts'
+import { getPostsList, getUserPosts } from '../../WebAPI'
+import { AuthContext, LoadingContext } from '../../contexts'
 import {
   PostContainer,
   PostTitle,
   PostDate,
   PostList,
+  ButtonWrapper,
+  PostListButton,
   YearContainer,
   Year,
 } from './PostListPageStyle'
@@ -27,34 +29,107 @@ Post.propTypes = {
 }
 
 function PostListPage() {
+  const { user } = useContext(AuthContext)
   const { setIsLoading } = useContext(LoadingContext)
   const [posts, setPosts] = useState([])
+  const [postState, setPostState] = useState('allPosts')
   const [years, setYears] = useState([])
 
   useLayoutEffect(() => {
-    const PostsList = async () => {
+    const fetchPostList = async () => {
       setIsLoading(true)
+
+      if (user) {
+        const userId = user.id
+        const data = await getUserPosts(userId)
+
+        const posts = data.posts.sort((a, b) => {
+          return a.createdAt < b.createdAt ? 1 : -1
+        })
+        setPosts(posts)
+        setPostState('myPosts')
+        setIsLoading(false)
+        return
+      }
 
       const data = await getPostsList()
       setPosts(data)
-
-      const yearsArray = []
-      for (const post of posts) {
-        yearsArray.push(new Date(post.createdAt).getFullYear())
-      }
-      setYears([...new Set(yearsArray)])
-
       setIsLoading(false)
     }
 
-    PostsList()
-  }, [setIsLoading, posts])
+    fetchPostList()
+  }, [setIsLoading, user])
+
+  useEffect(() => {
+    const yearsArray = []
+    for (const post of posts) {
+      yearsArray.push(new Date(post.createdAt).getFullYear())
+    }
+
+    setYears([...new Set(yearsArray)])
+  }, [posts])
+
+  const handleAllPosts = () => {
+    setPostState('allPosts')
+    const fetchPostList = async () => {
+      setIsLoading(true)
+
+      const data = await getPostsList()
+
+      setPosts(data)
+      setIsLoading(false)
+    }
+    fetchPostList()
+  }
+
+  const handleUserPosts = () => {
+    setPostState('myPosts')
+    const fetchUserPostList = async () => {
+      setIsLoading(true)
+
+      const userId = user.id
+      const data = await getUserPosts(userId)
+      const posts = data.posts.sort((a, b) => {
+          return a.createdAt < b.createdAt ? 1 : -1
+        })
+
+      setPosts(posts)
+      setIsLoading(false)
+    }
+    fetchUserPostList()
+  }
 
   return (
     <PostList>
-      {years.map((year) => {
+      {user && (
+        <ButtonWrapper>
+          {postState === 'allPosts' && (
+            <>
+              <PostListButton $active onClick={handleAllPosts}>
+                all posts
+              </PostListButton>{' '}
+              /
+              <PostListButton onClick={handleUserPosts}>
+                my posts
+              </PostListButton>
+            </>
+          )}
+          {postState === 'myPosts' && (
+            <>
+              <PostListButton onClick={handleAllPosts}>
+                all posts
+              </PostListButton>{' '}
+              /
+              <PostListButton $active onClick={handleUserPosts}>
+                my posts
+              </PostListButton>
+            </>
+          )}
+        </ButtonWrapper>
+      )}
+      {years.map((year, index) => {
         return (
-          <YearContainer>
+          <YearContainer key={index}>
             <Year>{year}</Year>
             {posts
               .filter((post) => new Date(post.createdAt).getFullYear() === year)

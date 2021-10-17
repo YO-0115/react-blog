@@ -43,7 +43,7 @@ function HomePage() {
   const [isPaginationLoading, setIsPaginationLoading] = useState(null)
 
   useLayoutEffect(() => {
-    const homePagePosts = async () => {
+    const fetchGetHomePosts = async () => {
       setIsLoading(true)
       setIsPaginationLoading(false)
 
@@ -55,7 +55,7 @@ function HomePage() {
       setIsPaginationLoading(true)
     }
 
-    homePagePosts()
+    fetchGetHomePosts()
   }, [setIsLoading, page, totalPostPages])
 
   const handlePreBtnClick = () => {

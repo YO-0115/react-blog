@@ -1,10 +1,11 @@
 import React, { useLayoutEffect, useState, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import MDEditor from '@uiw/react-md-editor'
-import { getPostId } from '../../WebAPI'
-import { LoadingContext } from '../../contexts'
+import { getPostId, deletePost } from '../../WebAPI'
+import { AuthContext, LoadingContext } from '../../contexts'
 import {
   PostContainer,
+  DeleteButton,
   PostTitle,
   PostBody,
   PostInfo,
@@ -15,24 +16,35 @@ import {
 
 function PostPage() {
   const { id } = useParams()
+  const { user } = useContext(AuthContext)
   const { setIsLoading } = useContext(LoadingContext)
+  const history = useHistory()
   const [post, setPost] = useState({})
+  const [userId, setUserId] = useState(null)
+
 
   useLayoutEffect(() => {
-    const getPost = async () => {
+    const FetchGetPost = async () => {
       setIsLoading(true)
-
+     
       const data = await getPostId(id)
-      setPost(data)
-
+      setPost(data)  
+      setUserId(data.user.id)
       setIsLoading(false)
     }
 
-    getPost()
+    FetchGetPost()
   }, [setIsLoading, id])
+
+  const handleDelete = () => {
+    deletePost(id).then(() => {
+      history.goBack()
+    })
+  }
 
   return (
     <PostContainer>
+      {user && user.id === userId && <DeleteButton onClick={handleDelete}>刪除</DeleteButton>}
       <PostTitle>{post.title}</PostTitle>
       <PostBody>
         <PostInfo>
