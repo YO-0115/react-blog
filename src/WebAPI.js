@@ -35,7 +35,7 @@ export const login = async (username, password) => {
         password,
       }),
     })
-    const data = response.json()
+    const data = await response.json()
     return data
   } catch (err) {
     console.log(err.message)
@@ -50,7 +50,7 @@ export const getMe = async () => {
         authorization: `Bearer ${token}`,
       },
     })
-    const data = response.json()
+    const data = await response.json()
     return data
   } catch (err) {
     console.log(err.message)
@@ -117,7 +117,7 @@ export const createNewPost = async (title, body) => {
         body,
       }),
     })
-    const data = response.json()
+    const data = await response.json()
     return data
   } catch (err) {
     console.log(err.message)
