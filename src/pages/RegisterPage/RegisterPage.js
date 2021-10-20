@@ -38,6 +38,7 @@ function LoginPage() {
     if (!getMeResponse) {
       setAuthToken(null)
       setErrorMessage(getMeResponse.toString())
+      return
     }
     setUser(getMeResponse.data)
     history.push('/')

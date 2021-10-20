@@ -1,5 +1,6 @@
 import React, { useState, useLayoutEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
+import MDEditor from '@uiw/react-md-editor'
 import { getPosts } from '../../WebAPI'
 import { LoadingContext } from '../../contexts'
 import {
@@ -23,7 +24,9 @@ function HomePost({ post }) {
       <HomePostDate>
         {new Date(post.createdAt).toLocaleDateString()}
       </HomePostDate>
-      <HomePostBody>{post.body}</HomePostBody>
+      <HomePostBody>
+        <MDEditor.Markdown source={post.body} />
+      </HomePostBody>
     </HomePostContainer>
   )
 }
@@ -40,7 +43,7 @@ function HomePage() {
   const [isPaginationLoading, setIsPaginationLoading] = useState(null)
 
   useLayoutEffect(() => {
-    const homePagePosts = async () => {
+    const fetchGetHomePosts = async () => {
       setIsLoading(true)
       setIsPaginationLoading(false)
 
@@ -52,7 +55,7 @@ function HomePage() {
       setIsPaginationLoading(true)
     }
 
-    homePagePosts()
+    fetchGetHomePosts()
   }, [setIsLoading, page, totalPostPages])
 
   const handlePreBtnClick = () => {

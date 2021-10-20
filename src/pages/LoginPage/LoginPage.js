@@ -23,20 +23,21 @@ function LoginPage() {
     e.preventDefault()
     setErrorMessage(null)
 
-    const LoginResponse = await login(username, password)
+    const loginResponse = await login(username, password)
 
-    if (!LoginResponse.ok) {
-      setErrorMessage(LoginResponse.message)
+    if (!loginResponse.ok) {
+      setErrorMessage(loginResponse.message)
       return
     }
 
-    setAuthToken(LoginResponse.token)
+    setAuthToken(loginResponse.token)
 
     const getMeResponse = await getMe()
 
     if (!getMeResponse) {
       setAuthToken(null)
       setErrorMessage(getMeResponse.toString())
+      return
     }
     setUser(getMeResponse.data)
     history.push('/')

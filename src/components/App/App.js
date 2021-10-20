@@ -32,8 +32,8 @@ function App() {
     getMe().then((response) => {
       if (response.ok) {
         setUser(response.data)
+        setIsUser(true)
       }
-      setIsUser(true)
     })
   }, [])
 
