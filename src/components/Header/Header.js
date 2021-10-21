@@ -1,10 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { AuthContext } from '../../contexts'
 import { setAuthToken } from '../../utils'
 import {
-  HeaderContainer,
-  LeftContainer,
+  HeaderWrapper,
+  Hamburger,
+  Span,
+  NavbarContainer,
   Brand,
   NavbarList,
   Nav,
@@ -17,39 +19,48 @@ const activeStyle = {
 
 function Header({ isUser }) {
   const { user, setUser } = useContext(AuthContext)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  console.log(isMenuOpen)
 
   const handleLogout = () => {
     setAuthToken('')
     setUser(null)
+    setIsMenuOpen(false)
   }
 
   return (
-    <HeaderContainer>
+    <HeaderWrapper>
+      <Brand to="/">Blog</Brand>
+      <Hamburger
+        $isMenuOpen={isMenuOpen}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <Span />
+        <Span />
+        <Span />
+      </Hamburger>
       {isUser && (
-        <>
-          <LeftContainer>
-            <Brand to="/">Blog</Brand>
-            <NavbarList>
-              <Nav to="/posts-list" activeStyle={activeStyle}>
-                文章列表
+        <NavbarContainer $isMenuOpen={isMenuOpen}>
+          <NavbarList>
+            <Nav to="/posts-list" activeStyle={activeStyle} onClick={() => setIsMenuOpen(false)}>
+              文章列表
+            </Nav>
+            <Nav to="/about" activeStyle={activeStyle} onClick={() => setIsMenuOpen(false)}>
+              關於我
+            </Nav>
+            {user && (
+              <Nav to="/new-post" activeStyle={activeStyle} onClick={() => setIsMenuOpen(false)}>
+                發布文章
               </Nav>
-              <Nav to="/about" activeStyle={activeStyle}>
-                關於我
-              </Nav>
-              {user && (
-                <Nav to="/new-post" activeStyle={activeStyle}>
-                  發布文章
-                </Nav>
-              )}
-            </NavbarList>
-          </LeftContainer>
+            )}
+          </NavbarList>
           <NavbarList>
             {!user && (
               <>
-                <Nav to="/register" activeStyle={activeStyle}>
+                <Nav to="/register" activeStyle={activeStyle} onClick={() => setIsMenuOpen(false)}>
                   註冊
                 </Nav>
-                <Nav to="/login" activeStyle={activeStyle}>
+                <Nav to="/login" activeStyle={activeStyle} onClick={() => setIsMenuOpen(false)}>
                   登入
                 </Nav>
               </>
@@ -60,9 +71,9 @@ function Header({ isUser }) {
               </Nav>
             )}
           </NavbarList>
-        </>
+        </NavbarContainer>
       )}
-    </HeaderContainer>
+    </HeaderWrapper>
   )
 }
 

@@ -11,6 +11,7 @@ export const DeleteButton = styled.div`
   right: 0;
   top: 10px;
   cursor: pointer;
+  transition: all 0.1s;
 
   &:hover {
     color: #145df6;
@@ -31,7 +32,7 @@ export const PostTitle = styled.div`
 export const PostBody = styled.div`
   padding: 16px 18px 0;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 54px;
 `
 
 export const PostInfo = styled.div`
@@ -56,7 +57,6 @@ export const PostCreatedAt = styled.div`
 
 export const PostContent = styled.div`
   margin-bottom: 28px;
-  line-height: 1.7;
   word-wrap: break-word;
   word-break: break-all;
   white-space: pre-wrap;

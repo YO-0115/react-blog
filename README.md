@@ -3,12 +3,13 @@
 
 ✨[DEMO](https://yo-0115.github.io/react-blog/#/)
 
-![](https://i.imgur.com/0GJWiHA.gif)
+![](./DEMO.gif)
 
 ## 功能描述
 - 可註冊、登入
 - 可用 Markdown 撰寫文章
 - 查看所有文章或是自己發布的文章
+- 文章留言功能
 - 刪除自己文章
 
 ## 前端技術

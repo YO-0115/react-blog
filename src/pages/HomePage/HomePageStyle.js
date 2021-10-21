@@ -15,6 +15,7 @@ export const HomePostContainer = styled(Link)`
   justify-content: space-between;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   color: #333;
+  transition: all 0.1s;
 
   & + & {
     margin-top: 24px;
@@ -70,6 +71,7 @@ export const Pagination = styled.div`
 export const PageBtn = styled.div`
   cursor: pointer;
   font-weight: bold;
+  transition: all 0.1s;
 
   &:hover {
     color: #145df6;
