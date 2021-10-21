@@ -10,14 +10,11 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     display: flex;
+    transition: all 0.1s;
   
     &:hover {
-      text-decoration: none;
+      cursor: pointer;
     }
-  }
-  
-  a:hover {
-    cursor: pointer;
   }
 
   input {
@@ -28,9 +25,17 @@ const GlobalStyle = createGlobalStyle`
   button {
     border: none;
     cursor: pointer;
+
+    &:hover, 
+    &:focus {
+      outline: none;
+    }
   }
-  button:hover, button:focus {
-    outline: none;
+
+  hr {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 16px;
   }
 `
 

@@ -17,6 +17,7 @@ export const PostListButton = styled.div`
   cursor: pointer;
   color: ${(props) => (props.$active ? 'black' : 'gray')};
   font-weight: ${(props) => (props.$active ? '600' : '')};
+  transition: all 0.1s;
 
   &:hover {
     color: #145df6;
@@ -45,6 +46,7 @@ export const PostContainer = styled(Link)`
   align-items: flex-start;
   justify-content: space-between;
   background: white;
+  transition: all 0.1s;
 
   &:hover {
     transform: scale(1.1);

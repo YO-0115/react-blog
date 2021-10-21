@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import MDEditor from '@uiw/react-md-editor'
 import { getPostId, deletePost } from '../../WebAPI'
 import { AuthContext, LoadingContext } from '../../contexts'
+import Comments from '../../components/Comments'
 import {
   PostContainer,
   DeleteButton,
@@ -57,6 +58,8 @@ function PostPage() {
           <MDEditor.Markdown source={post.body} />
         </PostContent>
       </PostBody>
+      <hr/>
+      <Comments />
     </PostContainer>
   )
 }
