@@ -3,7 +3,7 @@
 
 ✨[DEMO](https://yo-0115.github.io/react-blog/#/)
 
-![](./DEMO.gif)
+![](./demo.gif)
 
 ## 功能描述
 - 可註冊、登入
