@@ -21,6 +21,7 @@
     - styled components : JSX 語法撰寫 CSS 樣式
     - PropTypes : 型別檢查
     - @uiw/react-md-editor : 串接 Markdown 編輯器
+    - utterances : 安裝 GitHub Issue 留言功能
 
 ## 後端
 串接 [lidemy-student-json-api-server](https://github.com/Lidemy/lidemy-student-json-api-server)
