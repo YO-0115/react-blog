@@ -13,14 +13,13 @@ import {
 } from './HeaderStyle'
 
 const activeStyle = {
-  'font-weight': '600',
-  'border-bottom': '2px solid rgba(0, 0, 0, 0.5)',
+  fontWeight: '600',
+  borderBottom: '2px solid rgba(0, 0, 0, 0.5)',
 }
 
 function Header({ isUser }) {
   const { user, setUser } = useContext(AuthContext)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  console.log(isMenuOpen)
 
   const handleLogout = () => {
     setAuthToken('')

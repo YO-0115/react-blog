@@ -34,7 +34,6 @@ export const FormTitleButton = styled.button`
   margin-bottom: 54px;
   border-bottom: 1px solid #ccc;
   animation: ${flow} 2s infinite;
-  background: none;
 `
 export const FormInfo = styled.label`
   display: flex;

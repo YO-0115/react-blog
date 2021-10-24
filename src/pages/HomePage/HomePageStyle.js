@@ -84,3 +84,19 @@ export const CurrentPage = styled.div`
 export const TotalPage = styled.div`
   text-align: center;
 `
+
+export const Dots = styled.span``
+
+export const Button = styled.button`
+  margin: 4px;
+  padding: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transition: all 0.1s;
+
+  &:hover {
+    background: #333;
+    color: white;
+  }
+`
