@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+
+  body {
+    background: ${({ theme }) => theme.backgroundColor};
+  }
   
   a {
     text-decoration: none;
@@ -20,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
   input {
     outline: none;
     border: none;
+    background: none;
   }
   
   button {

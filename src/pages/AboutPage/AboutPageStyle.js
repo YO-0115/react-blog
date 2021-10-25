@@ -13,4 +13,5 @@ export const AboutText = styled.div`
   text-align: center;
   line-height: 2;
   font-size: 32px;
+  color: ${({theme}) => theme.textColor}
 `

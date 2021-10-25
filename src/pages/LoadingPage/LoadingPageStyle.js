@@ -22,7 +22,7 @@ export const LoadingWrapper = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  background: white;
+  background: ${({ theme }) => theme.backgroundColor};
   z-index: 10;
 `
 export const Loading = styled.div`

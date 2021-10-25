@@ -29,6 +29,7 @@ export const FormTitleButton = styled.button`
   font-size: 28px;
   font-weight: bold;
   text-align: center;
+  color: ${({ theme }) => theme.titleColor};
   padding-bottom: 16px;
   width: 100%;
   margin-bottom: 54px;
@@ -47,13 +48,14 @@ export const FormInfo = styled.label`
 
 export const FormText = styled.div`
   margin-right: 24px;
-  color: #333;
+  color: ${({ theme }) => theme.textColor};
   font-weight: 600;
 `
 
 export const FormInput = styled.input`
   display: block;
   padding: 6px 0;
+  color: ${({ theme }) => theme.textColor};
 
   &::-webkit-input-placeholder {
     text-align: center;

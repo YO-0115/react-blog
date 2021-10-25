@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import MDEditor from '@uiw/react-md-editor'
 import { getPostId, deletePost } from '../../WebAPI'
 import { AuthContext, LoadingContext } from '../../contexts'
@@ -15,7 +16,7 @@ import {
   PostContent,
 } from './PostPageStyle'
 
-function PostPage() {
+function PostPage({ currentTheme }) {
   const { id } = useParams()
   const { user } = useContext(AuthContext)
   const { setIsLoading } = useContext(LoadingContext)
@@ -23,13 +24,12 @@ function PostPage() {
   const [post, setPost] = useState({})
   const [userId, setUserId] = useState(null)
 
-
   useLayoutEffect(() => {
     const FetchGetPost = async () => {
       setIsLoading(true)
-     
+
       const data = await getPostId(id)
-      setPost(data)  
+      setPost(data)
       setUserId(data.user.id)
       setIsLoading(false)
     }
@@ -45,7 +45,9 @@ function PostPage() {
 
   return (
     <PostContainer>
-      {user && user.id === userId && <DeleteButton onClick={handleDelete}>刪除</DeleteButton>}
+      {user && user.id === userId && (
+        <DeleteButton onClick={handleDelete}>刪除</DeleteButton>
+      )}
       <PostTitle>{post.title}</PostTitle>
       <PostBody>
         <PostInfo>
@@ -58,10 +60,14 @@ function PostPage() {
           <MDEditor.Markdown source={post.body} />
         </PostContent>
       </PostBody>
-      <hr/>
-      <Comments />
+      <hr />
+      <Comments currentTheme={currentTheme}/>
     </PostContainer>
   )
+}
+
+PostPage.propTypes = {
+  currentTheme: PropTypes.object,
 }
 
 export default PostPage

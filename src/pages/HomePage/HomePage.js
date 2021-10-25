@@ -53,6 +53,7 @@ function HomePage() {
     }
 
     fetchGetHomePosts()
+    window.scroll(0, 0)
   }, [setIsLoading, page, totalPostPages])
 
   return (

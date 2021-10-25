@@ -33,9 +33,10 @@ export const NewPostTitleInput = styled.input`
   padding: 4px 8px;
   text-overflow: ellipsis;
   overflow: auto;
+  color: ${({ theme }) => theme.textColor};
 
   &:focus {
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #ccc;
   }
 `
 
@@ -54,6 +55,7 @@ export const NewPostButton = styled.button`
   padding-bottom: 4px;
   font-size: 18px;
   font-weight: bold;
+  color: ${({ theme }) => theme.textColor};
   animation: ${flow} 2s infinite;
 `
 
