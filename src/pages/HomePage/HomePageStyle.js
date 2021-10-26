@@ -7,16 +7,7 @@ export const HomePostList = styled.div`
   margin: 40px auto;
 `
 
-export const HomePostTitle = styled.div`
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: ${({ theme }) => theme.titleColor};
-`
-
-export const HomePostContainer = styled(Link)`
+export const HomePostContainer = styled.div`
   border: 1px solid #ccc;
   padding: 16px;
   display: flex;
@@ -29,8 +20,17 @@ export const HomePostContainer = styled(Link)`
   & + & {
     margin-top: 24px;
   }
+`
 
-  &:hover ${HomePostTitle} {
+export const HomePostTitle = styled(Link)`
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: ${({ theme }) => theme.titleColor};
+
+   &:hover {
     color: ${({ theme }) => theme.hoverColor};
   }
 `

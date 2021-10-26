@@ -15,8 +15,8 @@ import {
 
 function HomePost({ post }) {
   return (
-    <HomePostContainer to={`/posts/${post.id}`}>
-      <HomePostTitle>{post.title}</HomePostTitle>
+    <HomePostContainer>
+      <HomePostTitle to={`/posts/${post.id}`}>{post.title}</HomePostTitle>
       <HomePostAuthor>{post.user && post.user.nickname}</HomePostAuthor>
       <HomePostDate>
         {new Date(post.createdAt).toLocaleDateString()}
@@ -53,7 +53,7 @@ function HomePage() {
     }
 
     fetchGetHomePosts()
-    window.scroll(0, 0)
+    window.scrollTo(0, 0)
   }, [setIsLoading, page, totalPostPages])
 
   return (

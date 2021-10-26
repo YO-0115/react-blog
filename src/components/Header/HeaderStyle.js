@@ -136,7 +136,7 @@ export const Nav = styled(NavLink)`
     margin-bottom: 16px;
     width: 100%;
 
-    &:before {
+    &::before {
       content: '';
       position: absolute;
       bottom: 0;
@@ -144,7 +144,7 @@ export const Nav = styled(NavLink)`
       height: 0;
     }
 
-    &:hover:before {
+    &:hover::before {
       width: 0;
     }
 
@@ -153,4 +153,17 @@ export const Nav = styled(NavLink)`
       color: ${({ theme }) => theme.hoverColor};
     }
   }
+`
+
+export const ProgressContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 4px;
+  z-index: 100;
+`
+
+export const ProgressBar = styled.div`
+  width: ${props => props.$scroll};
+  height: 4px;
+  background: red;
 `

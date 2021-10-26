@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
@@ -11,7 +10,6 @@ function Comments({ currentTheme }) {
     script.setAttribute('repo', 'YO-0115/react-blog')
     script.setAttribute('issue-term', 'pathname')
 
-    console.log(currentTheme)
     if (currentTheme === 'light') {
       script.setAttribute('theme', 'github-light')
     } else {
@@ -34,7 +32,7 @@ function Comments({ currentTheme }) {
 }
 
 Comments.propTypes = {
-  currentTheme: PropTypes.object,
+  currentTheme: PropTypes.string,
 }
 
 export default Comments

@@ -20,7 +20,6 @@ export const getTheme = () => {
   return localStorage.getItem(THEME_NAME) || 'light'
 }
 
-
 export function ScrollToTop() {
   const { pathname } = useLocation()
 

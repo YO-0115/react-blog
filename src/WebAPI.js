@@ -96,7 +96,6 @@ export const getUserPosts = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}/users/${userId}?_embed=posts`)
     const data = await response.json()
-    console.log(data)
     return data
   } catch (err) {
     console.log(err.message)

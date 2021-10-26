@@ -67,7 +67,7 @@ function PostPage({ currentTheme }) {
 }
 
 PostPage.propTypes = {
-  currentTheme: PropTypes.object,
+  currentTheme: PropTypes.string,
 }
 
 export default PostPage
