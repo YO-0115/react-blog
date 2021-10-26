@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import MDEditor from '@uiw/react-md-editor'
 import { getPosts } from '../../WebAPI'
 import { LoadingContext } from '../../contexts'
+import Paginator from './Paginator'
 import {
   HomePostContainer,
   HomePostTitle,
@@ -10,16 +11,12 @@ import {
   HomePostDate,
   HomePostBody,
   HomePostList,
-  Pagination,
-  PageBtn,
-  CurrentPage,
-  TotalPage,
 } from './HomePageStyle'
 
 function HomePost({ post }) {
   return (
-    <HomePostContainer to={`/posts/${post.id}`}>
-      <HomePostTitle>{post.title}</HomePostTitle>
+    <HomePostContainer>
+      <HomePostTitle to={`/posts/${post.id}`}>{post.title}</HomePostTitle>
       <HomePostAuthor>{post.user && post.user.nickname}</HomePostAuthor>
       <HomePostDate>
         {new Date(post.createdAt).toLocaleDateString()}
@@ -49,28 +46,15 @@ function HomePage() {
 
       const data = await getPosts(page)
       setPosts(data.data)
-      setTotalPostPages(Math.ceil((data.total - 1) / 5))
+      setTotalPostPages(Math.ceil(data.total / 5))
 
       setIsLoading(false)
       setIsPaginationLoading(true)
     }
 
     fetchGetHomePosts()
+    window.scrollTo(0, 0)
   }, [setIsLoading, page, totalPostPages])
-
-  const handlePreBtnClick = () => {
-    if (page > 1) {
-      setPage(page - 1)
-    }
-    window.scrollTo(0, 0)
-  }
-
-  const handleNextBtnClick = () => {
-    if (page < totalPostPages) {
-      setPage(page + 1)
-    }
-    window.scrollTo(0, 0)
-  }
 
   return (
     <HomePostList>
@@ -79,14 +63,13 @@ function HomePage() {
       ))}
       {isPaginationLoading && (
         <>
-          <Pagination>
-            <PageBtn onClick={handlePreBtnClick}>＜</PageBtn>
-            <CurrentPage>{page}</CurrentPage>
-            <PageBtn onClick={handleNextBtnClick}>＞</PageBtn>
-          </Pagination>
-          <TotalPage>
-            {page} / {totalPostPages}
-          </TotalPage>
+          {!!posts.length && !!totalPostPages && (
+            <Paginator
+              page={page}
+              setPage={setPage}
+              totalPostPages={totalPostPages}
+            />
+          )}
         </>
       )}
     </HomePostList>

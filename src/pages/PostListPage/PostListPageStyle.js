@@ -15,14 +15,18 @@ export const ButtonWrapper = styled.div`
 export const PostListButton = styled.div`
   margin: 0 8px;
   cursor: pointer;
-  color: ${(props) => (props.$active ? 'black' : 'gray')};
+  color: ${(props) => (props.$active ? 'red' : 'gray')};
   font-weight: ${(props) => (props.$active ? '600' : '')};
   transition: all 0.1s;
 
   &:hover {
-    color: #145df6;
+    color:  ${({ theme }) => theme.hoverColor};
   }
 `
+
+export const Span = styled.span`
+  color: ${({ theme }) => theme.textColor};
+` 
 
 export const YearContainer = styled.div`
   padding-top: 32px;
@@ -37,7 +41,8 @@ export const Year = styled.span`
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 24px;
-  border-bottom: 3px solid #145df6;
+  border-bottom: 3px solid ${({ theme }) => theme.hoverColor};
+  color: ${({ theme }) => theme.titleColor};
 `
 
 export const PostContainer = styled(Link)`
@@ -45,19 +50,19 @@ export const PostContainer = styled(Link)`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  background: white;
+  background: ${({ theme }) => theme.backgroundColor};
   transition: all 0.1s;
 
   &:hover {
     transform: scale(1.1);
     border: 1px solid #ccc;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: ${({ theme }) => theme.postBoxShadow};
   }
 `
 
 export const PostTitle = styled.div`
   font-size: 24px;
-  color: #333;
+  color: ${({ theme }) => theme.titleColor};
   max-width: 600px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -65,6 +70,6 @@ export const PostTitle = styled.div`
 `
 
 export const PostDate = styled.div`
-  color: rgba(0, 0, 0, 0.7);
+  color: ${({ theme }) => theme.infoColor};
   font-size: 14px;
 `

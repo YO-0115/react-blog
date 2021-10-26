@@ -9,6 +9,7 @@ import {
   PostList,
   ButtonWrapper,
   PostListButton,
+  Span,
   YearContainer,
   Year,
 } from './PostListPageStyle'
@@ -90,8 +91,8 @@ function PostListPage() {
       const userId = user.id
       const data = await getUserPosts(userId)
       const posts = data.posts.sort((a, b) => {
-          return a.createdAt < b.createdAt ? 1 : -1
-        })
+        return a.createdAt < b.createdAt ? 1 : -1
+      })
 
       setPosts(posts)
       setIsLoading(false)
@@ -107,8 +108,8 @@ function PostListPage() {
             <>
               <PostListButton $active onClick={handleAllPosts}>
                 all posts
-              </PostListButton>{' '}
-              /
+              </PostListButton>
+              <Span>/</Span>
               <PostListButton onClick={handleUserPosts}>
                 my posts
               </PostListButton>
@@ -118,8 +119,8 @@ function PostListPage() {
             <>
               <PostListButton onClick={handleAllPosts}>
                 all posts
-              </PostListButton>{' '}
-              /
+              </PostListButton>
+              <Span>/</Span>
               <PostListButton $active onClick={handleUserPosts}>
                 my posts
               </PostListButton>
