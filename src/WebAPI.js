@@ -123,6 +123,27 @@ export const createNewPost = async (title, body) => {
   }
 }
 
+export const editPost = async (id, title, body) => {
+  const token = getAuthToken()
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${id}`, {
+      method: 'PATCH',
+      headers: {
+        authorization: `Bearer ${token}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        body,
+      }),
+    })
+    const data = await response.json()
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const deletePost = async (id) => {
   const token = getAuthToken()
   try {

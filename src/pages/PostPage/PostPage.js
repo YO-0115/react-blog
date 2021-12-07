@@ -7,6 +7,7 @@ import { AuthContext, LoadingContext } from '../../contexts'
 import Comments from '../../components/Comments'
 import {
   PostContainer,
+  EditButton,
   DeleteButton,
   PostTitle,
   PostBody,
@@ -22,7 +23,6 @@ function PostPage({ currentTheme }) {
   const { setIsLoading } = useContext(LoadingContext)
   const history = useHistory()
   const [post, setPost] = useState({})
-  const [userId, setUserId] = useState(null)
 
   useLayoutEffect(() => {
     const FetchGetPost = async () => {
@@ -30,7 +30,6 @@ function PostPage({ currentTheme }) {
 
       const data = await getPostId(id)
       setPost(data)
-      setUserId(data.user.id)
       setIsLoading(false)
     }
 
@@ -39,16 +38,21 @@ function PostPage({ currentTheme }) {
 
   const handleDelete = () => {
     deletePost(id).then(() => {
-      history.goBack()
+      history.push('/posts-list')
     })
   }
 
   return (
     <PostContainer>
-      {user && user.id === userId && (
-        <DeleteButton onClick={handleDelete}>刪除</DeleteButton>
-      )}
-      <PostTitle>{post.title}</PostTitle>
+      <PostTitle>
+        {post.title}
+        {(post && post.userId) === (user && user.id) && (
+          <>
+            <EditButton to={`/edit-post/${post && post.id}`}>編輯</EditButton>
+            <DeleteButton onClick={handleDelete}>刪除</DeleteButton>
+          </>
+        )}
+      </PostTitle>
       <PostBody>
         <PostInfo>
           <PostAuthor>{post.user && post.user.nickname}</PostAuthor>
@@ -61,7 +65,7 @@ function PostPage({ currentTheme }) {
         </PostContent>
       </PostBody>
       <hr />
-      <Comments currentTheme={currentTheme}/>
+      <Comments currentTheme={currentTheme} />
     </PostContainer>
   )
 }

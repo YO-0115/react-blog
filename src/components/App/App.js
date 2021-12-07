@@ -33,7 +33,7 @@ function App() {
     if (!getToken) return setIsUser(true)
 
     getMe().then((response) => {
-      if (response.ok) {
+      if (response.ok === 1) {
         setUser(response.data)
         setIsUser(true)
       }
@@ -58,13 +58,16 @@ function App() {
                   <HomePage />
                 </Route>
                 <Route path="/posts-list">
-                  <PostListPage />
+                  <PostListPage isUser={isUser} />
                 </Route>
                 <Route path="/posts/:id">
                   <PostPage currentTheme={currentTheme} />
                 </Route>
                 <Route path="/new-post">
                   <NewPostPage />
+                </Route>
+                <Route path="/edit-post/:editId">
+                  <NewPostPage edit="edit" />
                 </Route>
                 <Route path="/about">
                   <AboutPage />
