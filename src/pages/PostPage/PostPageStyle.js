@@ -1,21 +1,38 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const PostContainer = styled.div`
   width: 70%;
   margin: 56px auto;
-  position: relative;
 `
 
-export const DeleteButton = styled.div`
+export const EditButton = styled(Link)`
   position: absolute;
-  right: 0;
-  top: 10px;
+  right: 50px;
+  bottom: -40px;
+  font-size: 18px;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.1s;
   color: ${({ theme }) => theme.textColor};
 
   &:hover {
-    color:${({ theme }) => theme.hoverColor};
+    color: ${({ theme }) => theme.hoverColor};
+    font-weight: 600;
+`
+
+export const DeleteButton = styled.div`
+  position: absolute;
+  right: 5px;
+  bottom: -40px;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.1s;
+  color: ${({ theme }) => theme.textColor};
+
+  &:hover {
+    color: ${({ theme }) => theme.hoverColor};
     font-weight: 600;
   }
 `
@@ -29,6 +46,7 @@ export const PostTitle = styled.div`
   word-wrap: break-word;
   word-break: break-all;
   color: ${({ theme }) => theme.titleColor};
+  position: relative;
 `
 
 export const PostBody = styled.div`

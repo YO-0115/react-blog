@@ -29,7 +29,7 @@ Post.propTypes = {
   post: PropTypes.object,
 }
 
-function PostListPage() {
+function PostListPage({ isUser }) {
   const { user } = useContext(AuthContext)
   const { setIsLoading } = useContext(LoadingContext)
   const [posts, setPosts] = useState([])
@@ -39,27 +39,28 @@ function PostListPage() {
   useLayoutEffect(() => {
     const fetchPostList = async () => {
       setIsLoading(true)
+      if (isUser) {
+        if (user) {
+          const userId = user.id
+          const data = await getUserPosts(userId)
 
-      if (user) {
-        const userId = user.id
-        const data = await getUserPosts(userId)
+          const posts = data.posts.sort((a, b) => {
+            return a.createdAt < b.createdAt ? 1 : -1
+          })
+          setPosts(posts)
+          setPostState('myPosts')
+          setIsLoading(false)
+          return
+        }
 
-        const posts = data.posts.sort((a, b) => {
-          return a.createdAt < b.createdAt ? 1 : -1
-        })
-        setPosts(posts)
-        setPostState('myPosts')
+        const data = await getPostsList()
+        setPosts(data)
         setIsLoading(false)
-        return
       }
-
-      const data = await getPostsList()
-      setPosts(data)
-      setIsLoading(false)
     }
 
     fetchPostList()
-  }, [setIsLoading, user])
+  }, [isUser, setIsLoading, user])
 
   useEffect(() => {
     const yearsArray = []
@@ -142,6 +143,10 @@ function PostListPage() {
       })}
     </PostList>
   )
+}
+
+PostListPage.propTypes = {
+  isUser: PropTypes.bool,
 }
 
 export default PostListPage
